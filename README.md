@@ -4,6 +4,8 @@ Collaborative spotify playlists.
 
 See [`src/plotw.coffee`](src/plotw.coffee) for full documentation.
 
+Warning: none of the below is ready yet. You could install this by manually copying it to your scripts folder though.
+
 ## Installation
 
 In hubot project repo, run:
