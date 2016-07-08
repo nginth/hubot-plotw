@@ -10,7 +10,9 @@
     "url": "git://github.com/hubot-scripts/hubot-plotw.git"
   },
   "dependencies": {
-    "coffee-script": "^1.6.3"
+    "coffee-script": "^1.6.3",
+    "config": "^1.21.0",
+    "request": "^2.72.0"
   },
   "peerDependencies": {
     "hubot": "2.x"
