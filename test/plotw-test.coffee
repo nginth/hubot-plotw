@@ -1,13 +1,3 @@
-config = require 'config'
-process.env.PLOTW_CLIENT_ID = config.get 'auth.client_id'
-process.env.PLOTW_CLIENT_SECRET = config.get 'auth.client_secret'
-process.env.PLOTW_REFRESH_TOKEN = config.get 'auth.refresh_token'
-process.env.PLOTW_CHANNELS = config.get 'permissions.channels'
-process.env.PLOTW_ADMINS = config.get 'permissions.admins'
-process.env.PLOTW_USER_ID = config.get 'permissions.user_id'
-process.env.PLOTW_SONG_LIMIT = config.get 'permissions.song_limit'
-process.env.PLOTW_TEST_PLAYLIST = config.get 'test.playlist_id'
-
 Helper = require 'hubot-test-helper'
 helper = new Helper '../src/plotw.coffee'
 PlotwManager = require '../src/plotw-manager'
