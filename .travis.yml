@@ -10,6 +10,4 @@ cache:
 notifications:
   email: false
 env:
-  - PLOTW_ADMINS=Shell
-  - PLOTW_CHANNELS=Shell
-  - PLOTW_SONG_LIMIT=1
+  - PLOTW_ADMINS=Shell PLOTW_CHANNELS=Shell PLOTW_SONG_LIMIT=1
