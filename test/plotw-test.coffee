@@ -85,16 +85,15 @@ describe 'PlotwManager', ->
         expect(err.msg).to.equal @invalid_message_link
         expect(err.status).to.equal 'Error adding track: Invalid track uri: https://open.spotify.com/track/' + @invalid_track_id
 
-  describe.skip 'add duplicate', ->
-    beforeEach ->
-      @dupe_user = 'test'
-      @valid_track_id = '0nq6sfr8z1R5KJ4XUk396e'
-      @plotw.robot.brain.data.plotw.nominations.push({user: @dupe_user, song_id: @valid_track_id})
-      co => 
-        yield @room.user.say @dupe_user, 'plotw add ' + 'https://play.spotify.com/track/' + @valid_track_id
+    describe 'add duplicate', ->
+      beforeEach ->
+        @room = helper.createRoom()
+        @dupe_user = 'test'
+        @valid_track_id = '0nq6sfr8z1R5KJ4XUk396e'
+        @plotw.storage.history = [{id: config.get('test.playlist_id'), link: 'who.cares', date: '1/1/1970'}]
+        @plotw.storage.nominations.push({user: @dupe_user, song_id: @valid_track_id})
 
-    it 'fails on duplicate add', ->
-      expect(@room.messages).to.deep.equal [
-        [@dupe_user, 'plotw add ' + 'https://play.spotify.com/track/' + @valid_track_id]
-        ['hubot', 'Error: Duplicate user.']
-      ]
+      it 'fails on duplicate add', ->
+        @plotw.add_song @dupe_user, 'https://play.spotify.com/track/' + @valid_track_id, (err, success) =>
+          expect(success).to.equal null
+          expect(err.msg).to.equal 'Error: Duplicate user.'

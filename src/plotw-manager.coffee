@@ -42,7 +42,7 @@ class PlotwManager
     is_dupe_user: (user) ->
         exists = @storage.nominations.filter (nom) =>
             return nom.user == user
-        return exists.length > @song_limit
+        return exists.length >= @song_limit
 
     is_dupe_song: (song_id) ->
         exists = @storage.nominations.filter (nom) =>
@@ -54,7 +54,7 @@ class PlotwManager
             callback {msg: 'Error: No current playlist. Please run \"plotw new\".'}, null
             return
         if @is_dupe_user user
-            callback null, {msg: 'Duplicate user.'}
+            callback {msg: 'Error: Duplicate user.'}, null
             return
         spotify_uri = /^(spotify:track:)[a-zA-z0-9]*$/
         spotify_link = /^(http)s?(:\/\/(open|play).spotify.com\/track\/)[a-zA-z0-9]*$/
@@ -71,7 +71,7 @@ class PlotwManager
             return
 
         if @is_dupe_song song_id
-            callback null, {msg: 'Duplicate song.'}
+            callback {msg: 'Error: Duplicate song.'}, null
             return         
 
         auth.with_auth (access_token) =>
