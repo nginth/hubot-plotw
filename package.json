@@ -1,0 +1,33 @@
+{
+  "name": "hubot-plotw",
+  "description": "Collaborative spotify playlists.",
+  "version": "0.0.0",
+  "author": "Nick Ginther <nginth@gmail.com>",
+  "license": "MIT",
+  "keywords": "hubot-scripts, hubot, spotify",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hubot-scripts/hubot-plotw.git"
+  },
+  "dependencies": {
+    "coffee-script": "^1.6.3"
+  },
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "co": "^4.6.0",
+    "coffee-script": "1.6.3",
+    "hubot": "2.x",
+    "hubot-test-helper": "^1.4.4",
+    "matchdep": "~0.3.0",
+    "mocha": "^2.1.0",
+    "sinon": "^1.13.0",
+    "sinon-chai": "^2.7.0"
+  },
+  "main": "index.coffee",
+  "scripts": {
+    "test": "mocha --compilers mocha --compilers coffee:coffee-script/register test/*"
+  }
+}
