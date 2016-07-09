@@ -81,7 +81,7 @@ describe 'PlotwManager', ->
         @room = helper.createRoom()
         @dupe_user = 'test'
         @valid_track_id = '0nq6sfr8z1R5KJ4XUk396e'
-        @plotw.storage.history = [{id: config.get('test.playlist_id'), link: 'who.cares', date: '1/1/1970'}]
+        @plotw.storage.history = [{id: process.env.PLOTW_TEST_PLAYLIST, link: 'who.cares', date: '1/1/1970'}]
         @plotw.storage.nominations.push({user: @dupe_user, song_id: @valid_track_id})
 
       it 'fails on duplicate add', ->
