@@ -1,5 +1,7 @@
 # hubot-plotw
 
+[![Build Status](https://travis-ci.org/nginth/hubot-plotw.svg?branch=master)](https://travis-ci.org/nginth/hubot-plotw)
+
 Collaborative spotify playlists.
 
 See [`src/plotw.coffee`](src/plotw.coffee) for full documentation.
