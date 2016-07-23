@@ -24,6 +24,7 @@ Then add **hubot-plotw** to your `external-scripts.json`:
 
 ## Commands
 
+`plotw help`                - print usage
 `plotw add <spotify URI>`   - add a song to the current playlist
 `plotw nominations`         - print the current nominations
 `plotw history`             - print links to the past playlists

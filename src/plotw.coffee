@@ -16,13 +16,31 @@ PlotwManager = require './plotw-manager'
 module.exports = (robot) ->
     plotw = new PlotwManager robot
 
-    help = 'HELP: \ncommands: add <'  
+    usage = """
+            plotw commands:
+            `plotw add <spotify URI>`   - add a song to the current playlist
+            `plotw nominations`         - print the current nominations
+            `plotw history`             - print links to the past playlists
+            `plotw current`             - print a link to the current playlist
+            `plotw new`                 - clear nominations and create a new playlist
+            `plotw reset`               - clear nominations and history (start anew)
+            """
 
-    robot.hear /help/i, (msg) ->
-        msg.send help
+    robot.hear /^(plotw)(\s)(((add\s)(.*))|(.*))/, (msg) ->
+        command(msg)
 
-    robot.hear /add (.*)/i, (msg) ->
-        song_id = msg.match[1]
+    command: (msg) ->
+        switch msg.match[2]
+            when 'help' then msg.send usage
+            when 'add' then plotw_add msg, msg.match[3]
+            when 'new' then plotw_new msg
+            when 'nominations' then plotw_nominations msg
+            when 'history' then plotw_history msg
+            when 'current' then plotw_current msg
+            when 'reset' then plotw_reset msg
+            else msg.send usage
+
+    plotw_add: (msg, song_id) ->
         robot.logger.debug 'Adding to playlist: ' + song_id 
         plotw.add_song msg.message.user.name, song_id, (err, success) ->
             if err
@@ -30,14 +48,14 @@ module.exports = (robot) ->
                 return
             msg.send success.msg
 
-    robot.hear /new/i, (msg) ->
+    plotw_new: (msg) ->
         plotw.new_playlist msg.message.user.name, (err, success) ->
             if err
                 msg.send err.msg
                 return
             msg.send success.msg
 
-    robot.hear /nominations/i, (msg) ->
+    plotw_nominations: (msg) ->
         nominations = plotw.get_nominations()
         if not nominations.length
             msg.send 'No current nominations.'
@@ -46,7 +64,7 @@ module.exports = (robot) ->
         for nom in nominations
             msg.send ++i + '. ' + nom.user.slice(0,1) + '.' + nom.user.slice(1) + ' https://open.spotify.com/track/' + nom.song_id
 
-    robot.hear /history/i, (msg) ->
+    plotw_history: (msg) ->
         history = plotw.get_history()
         if not history.length
             msg.send 'No history.'
@@ -55,7 +73,7 @@ module.exports = (robot) ->
         for playlist in history
             msg.send ++i + '. (' + playlist.date + ') ' + playlist.link
 
-    robot.hear /current/i, (msg) ->
+    plotw_current: (msg) ->
         history = plotw.get_history()
         if not history.length
             msg.send 'No current playlist.'
@@ -63,5 +81,5 @@ module.exports = (robot) ->
         playlist = history[history.length - 1]
         msg.send 'Current playlist (' + playlist.date + '): ' + playlist.link
 
-    robot.hear /reset/i, (msg) ->
+    plotw_reset: (msg) ->
         msg.send plotw.reset msg.message.user.name
