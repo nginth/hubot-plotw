@@ -139,13 +139,13 @@ class PlotwManager
         @admins = ['Shell']
         @user_id = 'notarealuser'
         @song_limit = 1
-        if (process.env.PLOTW_CHANNELS not undefined)
+        if (process.env.PLOTW_CHANNELS isnt undefined)
             @channels = process.env.PLOTW_CHANNELS.split(',')
-        if (process.env.PLOTW_ADMINS not undefined)
+        if (process.env.PLOTW_ADMINS isnt undefined)
             @admins = process.env.PLOTW_ADMINS.split(',')
-        if (process.env.PLOTW_USER_ID not undefined)
+        if (process.env.PLOTW_USER_ID isnt undefined)
             @user_id = process.env.PLOTW_USER_ID
-        if (process.env.PLOTW_SONG_LIMIT not undefined)
+        if (process.env.PLOTW_SONG_LIMIT isnt undefined)
             @song_limit = process.env.PLOTW_SONG_LIMIT
 
 module.exports = PlotwManager
