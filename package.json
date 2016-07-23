@@ -1,7 +1,7 @@
 {
   "name": "hubot-plotw",
-  "description": "Collaborative spotify playlists.",
-  "version": "0.0.0",
+  "description": "Collaborative spotify playlists for hubot.",
+  "version": "1.0.0",
   "author": "Nick Ginther <nginth@gmail.com>",
   "license": "MIT",
   "keywords": "hubot-scripts, hubot, spotify",
@@ -12,9 +12,7 @@
   "dependencies": {
     "coffee-script": "^1.6.3",
     "config": "^1.21.0",
-    "request": "^2.72.0"
-  },
-  "peerDependencies": {
+    "request": "^2.72.0",
     "hubot": "2.x"
   },
   "devDependencies": {
