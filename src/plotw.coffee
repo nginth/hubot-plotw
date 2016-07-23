@@ -6,7 +6,7 @@
 # Configuration:
 #
 # Commands:
-#   plotw add <spotify track URI> - adds song to current playlist
+#   see usage
 #
 # Author:
 #   nginth
@@ -26,21 +26,7 @@ module.exports = (robot) ->
             `plotw reset`               - clear nominations and history (start anew)
             """
 
-    robot.hear /^(plotw)(\s)(((add\s)(.*))|(.*))/, (msg) ->
-        command(msg)
-
-    command: (msg) ->
-        switch msg.match[2]
-            when 'help' then msg.send usage
-            when 'add' then plotw_add msg, msg.match[3]
-            when 'new' then plotw_new msg
-            when 'nominations' then plotw_nominations msg
-            when 'history' then plotw_history msg
-            when 'current' then plotw_current msg
-            when 'reset' then plotw_reset msg
-            else msg.send usage
-
-    plotw_add: (msg, song_id) ->
+    plotw_add = (msg, song_id) ->
         robot.logger.debug 'Adding to playlist: ' + song_id 
         plotw.add_song msg.message.user.name, song_id, (err, success) ->
             if err
@@ -48,14 +34,14 @@ module.exports = (robot) ->
                 return
             msg.send success.msg
 
-    plotw_new: (msg) ->
+    plotw_new = (msg) ->
         plotw.new_playlist msg.message.user.name, (err, success) ->
             if err
                 msg.send err.msg
                 return
             msg.send success.msg
 
-    plotw_nominations: (msg) ->
+    plotw_nominations = (msg) ->
         nominations = plotw.get_nominations()
         if not nominations.length
             msg.send 'No current nominations.'
@@ -64,7 +50,7 @@ module.exports = (robot) ->
         for nom in nominations
             msg.send ++i + '. ' + nom.user.slice(0,1) + '.' + nom.user.slice(1) + ' https://open.spotify.com/track/' + nom.song_id
 
-    plotw_history: (msg) ->
+    plotw_history = (msg) ->
         history = plotw.get_history()
         if not history.length
             msg.send 'No history.'
@@ -73,7 +59,7 @@ module.exports = (robot) ->
         for playlist in history
             msg.send ++i + '. (' + playlist.date + ') ' + playlist.link
 
-    plotw_current: (msg) ->
+    plotw_current = (msg) ->
         history = plotw.get_history()
         if not history.length
             msg.send 'No current playlist.'
@@ -81,5 +67,17 @@ module.exports = (robot) ->
         playlist = history[history.length - 1]
         msg.send 'Current playlist (' + playlist.date + '): ' + playlist.link
 
-    plotw_reset: (msg) ->
+    plotw_reset = (msg) ->
         msg.send plotw.reset msg.message.user.name
+
+    robot.hear /^(plotw)(\s)(.*)/, (msg) =>
+        cmd = msg.match[3].split(' ') 
+        switch cmd[0]
+            when 'help' then msg.send usage
+            when 'add' then plotw_add msg, cmd[1]
+            when 'new' then plotw_new msg
+            when 'nominations' then plotw_nominations msg
+            when 'history' then plotw_history msg
+            when 'current' then plotw_current msg
+            when 'reset' then plotw_reset msg
+            else msg.send usage
