@@ -8,7 +8,7 @@ class PlotwManager
                 nominations: []
                 history: []
             }
-        set_environment()
+        @set_environment()
 
     is_admin: (user) ->
         return user in @admins
