@@ -43,6 +43,17 @@ All these need to be obtained and set before **hubot-plotw** will work. If you d
 
 `PLOTW_REFRESH_TOKEN` - the refresh token provided by the Spotify user auth flow
 
+#### Example
+```
+PLOTW_CHANNELS="music,bot-testing"
+PLOTW_ADMINS="Admin,Nick"
+PLOTW_SONG_LIMIT=1
+PLOTW_USER_ID="myspotifyid"
+PLOTW_CLIENT_ID="<some_long_string>"
+PLOTW_CLIENT_SECRET="<some_long_string>"
+PLOTW_REFRESH_TOKEN="<some_long_string>"
+```
+
 ## Commands
 
 `plotw help`                - print usage
