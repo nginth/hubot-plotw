@@ -8,13 +8,13 @@ class PlotwManager
                 nominations: []
                 history: []
             }
-        @channels = process.env.PLOTW_CHANNELS.split(',')
-        @admins = process.env.PLOTW_ADMINS.split(',')
-        @user_id = process.env.PLOTW_USER_ID
-        @song_limit = process.env.PLOTW_SONG_LIMIT
+        set_environment()
 
     is_admin: (user) ->
         return user in @admins
+
+    is_valid_channel: (channel) ->
+        return channel in @channels
 
     get_playlists: (callback) ->
         auth.with_auth (access_token) ->
@@ -133,5 +133,19 @@ class PlotwManager
         if month < 10
             month = '0' + month
         return month + '/' + day + '/' + year
+
+    set_environment: ->
+        @channels = ['Shell']
+        @admins = ['Shell']
+        @user_id = 'notarealuser'
+        @song_limit = 1
+        if (process.env.PLOTW_CHANNELS not undefined)
+            @channels = process.env.PLOTW_CHANNELS.split(',')
+        if (process.env.PLOTW_ADMINS not undefined)
+            @admins = process.env.PLOTW_ADMINS.split(',')
+        if (process.env.PLOTW_USER_ID not undefined)
+            @user_id = process.env.PLOTW_USER_ID
+        if (process.env.PLOTW_SONG_LIMIT not undefined)
+            @song_limit = process.env.PLOTW_SONG_LIMIT
 
 module.exports = PlotwManager

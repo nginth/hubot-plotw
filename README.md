@@ -20,6 +20,29 @@ Then add **hubot-plotw** to your `external-scripts.json`:
 ]
 ```
 
+## Configuration
+
+**hubot-plotw** uses 7 environment variables for configuration. These are as follows:
+
+#### Permissions
+`PLOTW_CHANNELS` - comma separated list of channels this package can be used in
+
+`PLOTW_ADMINS` - comma separated list of users that can use restricted commands (new, reset)
+
+`PLOTW_SONG_LIMIT` - amount of songs a single user can nominate per playlist
+
+#### Spotify
+
+All these need to be obtained and set before **hubot-plotw** will work. If you do not already have this information, I suggest going through the Spotify [Web API Tutorial](https://developer.spotify.com/web-api/tutorial/) and pulling the information from there.
+
+`PLOTW_USER_ID` - id of the spotify user that playlists will be created for
+
+`PLOTW_CLIENT_ID` - the unique application identifier provided by Spotify
+
+`PLOTW_CLIENT_SECRET` - the secret key provided by Spotify
+
+`PLOTW_REFRESH_TOKEN` - the refresh token provided by the Spotify user auth flow
+
 ## Commands
 
 `plotw help`                - print usage
