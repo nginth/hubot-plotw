@@ -7,7 +7,7 @@
   "keywords": "hubot-scripts, hubot, spotify",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-plotw.git"
+    "url": "https://github.com/nginth/hubot-plotw"
   },
   "dependencies": {
     "coffee-script": "^1.6.3",
